@@ -34,7 +34,7 @@ body {
       color: var(--text-clr-secondary);
 
       p {
-        font-size: 1rem;
+        // font-size: 1rem;
       }
 
       .theme-toggler {
@@ -44,14 +44,14 @@ body {
         &__labels,
         &__controllers {
           display: grid;
-          grid-template-columns: repeat(3, 20px);
+          grid-template-columns: repeat(3, 18px);
           gap: 0.5rem;
-          padding: 0.5rem;
+          padding: 0.25rem;
           text-align: center;
         }
 
         &__controllers {
-          background-color: var(--keypad-background);
+          background-color: var(--toggle-background);
           border-radius: 2rem;
 
           div {

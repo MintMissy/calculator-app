@@ -20,7 +20,43 @@ body.dark {
 }
 
 body.light {
+  --main-background: hsl(0, 0%, 90%);
+
+  // Section colors
+  --toggle-background: hsl(0, 5%, 81%);
+  --screen-background: hsl(0, 0%, 93%);
+  --keypad-background: hsl(0, 5%, 81%);
+
+  // Keypad colors
+  --key-background: hsl(45, 7%, 89%);
+  --key-shadow: hsl(35, 11%, 61%);
+  --key-primary-background: hsl(25, 98%, 40%);
+  --key-primary-shadow: hsl(25, 99%, 27%);
+  --key-accent-background: hsl(185, 42%, 37%);
+  --key-accent-shadow: hsl(185, 58%, 25%);
+
+  // Text colors
+  --text-clr-primary: hsl(60, 10%, 19%);
+  --text-clr-secondary: hsl(0, 0%, 100%);
 }
 
 body.dark--purple {
+  --main-background: hsl(268, 75%, 9%);
+
+  // Section colors
+  --toggle-background: hsl(268, 71%, 12%);
+  --screen-background: hsl(268, 71%, 12%);
+  --keypad-background: hsl(268, 71%, 12%);
+
+  // Keypad colors
+  --key-background: hsl(268, 47%, 21%);
+  --key-shadow: hsl(290, 70%, 36%);
+  --key-primary-background: hsl(176, 100%, 44%);
+  --key-primary-shadow: hsl(177, 92%, 70%);
+  --key-accent-background: hsl(281, 89%, 26%);
+  --key-accent-shadow: hsl(285, 91%, 52%);
+
+  // Text colors
+  --text-clr-primary: hsl(52, 100%, 62%);
+  --text-clr-secondary: hsl(0, 0%, 100%);
 }
