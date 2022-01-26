@@ -1,1 +1,95 @@
-@import '_themes.scss';
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap');
+
+@import './_themes.scss';
+@import './_css-reset';
+
+body {
+  background-color: var(--main-background);
+  padding: 1rem;
+  font-family: 'Spartan', sans-serif;
+}
+
+.calculator {
+  $sectionBorderRadius: 0.5rem;
+  $sectionPadding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 650px;
+  margin-inline: auto;
+  gap: 1.5rem;
+
+  &__header {
+    display: flex;
+
+    h1 {
+      color: var(--text-clr-secondary);
+    }
+  }
+
+  &__result {
+    border-radius: $sectionBorderRadius;
+    background-color: var(--screen-background);
+    padding: $sectionPadding;
+
+    p {
+      padding: 1rem;
+      font-size: 3rem;
+      color: var(--text-clr-secondary);
+      text-align: right;
+    }
+  }
+
+  &__keyboard {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-radius: $sectionBorderRadius;
+    background-color: var(--keypad-background);
+    padding: $sectionPadding;
+    gap: 1.5rem;
+
+    .key .key::after {
+      position: absolute;
+      bottom: 0;
+      content: '';
+      background-color: black;
+      height: 15px;
+      width: 100%;
+    }
+    .key {
+      $keyShadowSize: 6px;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      outline: none;
+      border: none;
+      border-radius: $sectionBorderRadius;
+      background-color: var(--key-background);
+      padding: 0.5rem;
+      padding-top: 1rem;
+      font-size: 2rem;
+      color: var(--text-clr-primary);
+      box-shadow: 0 $keyShadowSize var(--key-shadow);
+
+      &--small-fs {
+        font-size: 1.5rem;
+      }
+
+      &--accent {
+        background-color: var(--key-accent-background);
+        color: var(--text-clr-secondary);
+        box-shadow: 0 $keyShadowSize var(--key-accent-shadow);
+      }
+
+      &--primary {
+        background-color: var(--key-primary-background);
+        color: var(--text-clr-secondary);
+        box-shadow: 0 $keyShadowSize var(--key-primary-shadow);
+      }
+
+      &--long {
+        grid-column: span 2;
+      }
+    }
+  }
+}

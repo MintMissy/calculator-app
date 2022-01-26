@@ -1,15 +1,169 @@
+@import url("https://fonts.googleapis.com/css2?family=Spartan:wght@700&display=swap");
 body.dark {
-  --very-dark-desaturated-blue: hsl(222, 26%, 31%);
-  --very-dark-desaturated-blue: hsl(223, 31%, 20%);
-  --very-dark-desaturated-blue: hsl(224, 36%, 15%);
-  --desaturated-dark-blue: hsl(225, 21%, 49%);
-  --desaturated-dark-blue: hsl(224, 28%, 35%);
-  --red: hsl(6, 63%, 50%);
-  --dark-red: hsl(6, 70%, 34%);
-  --light-grayish-orange: hsl(30, 25%, 89%);
-  --grayish-orange: hsl(28, 16%, 65%);
-  --clr-text: hsl(0, 0, 100%);
-  --clr-text-dark: hsl(221, 14%, 31%);
+  --main-background: hsl(222, 26%, 31%);
+  --toggle-background: hsl(223, 31%, 20%);
+  --screen-background: hsl(224, 36%, 15%);
+  --keypad-background: hsl(223, 31%, 20%);
+  --key-background: hsl(30, 25%, 89%);
+  --key-shadow: hsl(28, 16%, 65%);
+  --key-primary-background: hsl(6, 63%, 50%);
+  --key-primary-shadow: hsl(6, 70%, 34%);
+  --key-accent-background: hsl(225, 21%, 49%);
+  --key-accent-shadow: hsl(224, 28%, 35%);
+  --text-clr-primary: hsl(221, 14%, 31%);
+  --text-clr-secondary: hsl(0, 0%, 100%);
+}
+
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+*::before,
+*::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+body {
+  background-color: var(--main-background);
+  padding: 1rem;
+  font-family: "Spartan", sans-serif;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  max-width: 650px;
+  margin-inline: auto;
+  gap: 1.5rem;
+}
+.calculator__header {
+  display: flex;
+}
+.calculator__header h1 {
+  color: var(--text-clr-secondary);
+}
+.calculator__result {
+  border-radius: 0.5rem;
+  background-color: var(--screen-background);
+  padding: 1.5rem;
+}
+.calculator__result p {
+  padding: 1rem;
+  font-size: 3rem;
+  color: var(--text-clr-secondary);
+  text-align: right;
+}
+.calculator__keyboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-radius: 0.5rem;
+  background-color: var(--keypad-background);
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+.calculator__keyboard .key .key::after {
+  position: absolute;
+  bottom: 0;
+  content: "";
+  background-color: black;
+  height: 15px;
+  width: 100%;
+}
+.calculator__keyboard .key {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: var(--key-background);
+  padding: 0.5rem;
+  padding-top: 1rem;
+  font-size: 2rem;
+  color: var(--text-clr-primary);
+  box-shadow: 0 6px var(--key-shadow);
+}
+.calculator__keyboard .key--small-fs {
+  font-size: 1.5rem;
+}
+.calculator__keyboard .key--accent {
+  background-color: var(--key-accent-background);
+  color: var(--text-clr-secondary);
+  box-shadow: 0 6px var(--key-accent-shadow);
+}
+.calculator__keyboard .key--primary {
+  background-color: var(--key-primary-background);
+  color: var(--text-clr-secondary);
+  box-shadow: 0 6px var(--key-primary-shadow);
+}
+.calculator__keyboard .key--long {
+  grid-column: span 2;
 }
 
 /*# sourceMappingURL=styles.css.map */
