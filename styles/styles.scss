@@ -20,9 +20,56 @@ body {
 
   &__header {
     display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
 
     h1 {
       color: var(--text-clr-secondary);
+    }
+
+    .theme-container {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.5rem;
+      color: var(--text-clr-secondary);
+
+      p {
+        font-size: 1rem;
+      }
+
+      .theme-toggler {
+        display: flex;
+        flex-direction: column;
+
+        &__labels,
+        &__controllers {
+          display: grid;
+          grid-template-columns: repeat(3, 20px);
+          gap: 0.5rem;
+          padding: 0.5rem;
+          text-align: center;
+        }
+
+        &__controllers {
+          background-color: var(--keypad-background);
+          border-radius: 2rem;
+
+          div {
+            position: relative;
+            cursor: pointer;
+          }
+
+          div:hover::after,
+          .active::after {
+            aspect-ratio: 1;
+            width: 100%;
+            border-radius: 100%;
+            background-color: var(--key-primary-background);
+            content: '';
+            display: block;
+          }
+        }
+      }
     }
   }
 
