@@ -139,8 +139,8 @@ body {
 }
 .calculator__header {
   display: flex;
-  align-items: flex-end;
   justify-content: space-between;
+  align-items: flex-end;
 }
 .calculator__header h1 {
   color: var(--text-clr-primary);
@@ -148,8 +148,8 @@ body {
 .calculator__header .theme-container {
   display: flex;
   align-items: flex-end;
-  gap: 1.5rem;
   color: var(--text-clr-primary);
+  gap: 1.5rem;
 }
 .calculator__header .theme-container .theme-toggler {
   display: flex;
@@ -158,13 +158,13 @@ body {
 .calculator__header .theme-container .theme-toggler__labels, .calculator__header .theme-container .theme-toggler__controllers {
   display: grid;
   grid-template-columns: repeat(3, 18px);
-  gap: 0.5rem;
   padding: 0.25rem;
+  gap: 0.5rem;
   text-align: center;
 }
 .calculator__header .theme-container .theme-toggler__controllers {
-  background-color: var(--toggle-background);
   border-radius: 2rem;
+  background-color: var(--toggle-background);
 }
 .calculator__header .theme-container .theme-toggler__controllers div {
   position: relative;
@@ -172,12 +172,15 @@ body {
 }
 .calculator__header .theme-container .theme-toggler__controllers div:hover::after,
 .calculator__header .theme-container .theme-toggler__controllers .active::after {
-  aspect-ratio: 1;
-  width: 100%;
-  border-radius: 100%;
-  background-color: var(--key-primary-background);
   content: "";
   display: block;
+  border-radius: 100%;
+  background-color: var(--key-primary-background);
+  width: 100%;
+  aspect-ratio: 1;
+}
+.calculator__header .theme-container .theme-toggler__controllers div:not(.active)::after {
+  opacity: 0.75;
 }
 .calculator__result {
   border-radius: 0.5rem;
@@ -198,14 +201,6 @@ body {
   padding: 1.5rem;
   gap: 1.5rem;
 }
-.calculator__keyboard .key .key::after {
-  position: absolute;
-  bottom: 0;
-  content: "";
-  background-color: black;
-  height: 15px;
-  width: 100%;
-}
 .calculator__keyboard .key {
   position: relative;
   display: flex;
@@ -219,6 +214,8 @@ body {
   padding-top: 1rem;
   font-size: 2rem;
   color: var(--text-keypad);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s;
   box-shadow: 0 6px var(--key-shadow);
 }
 .calculator__keyboard .key--small-fs {
@@ -236,6 +233,10 @@ body {
 }
 .calculator__keyboard .key--long {
   grid-column: span 2;
+}
+.calculator__keyboard .key:active {
+  transform: translateY(6px);
+  box-shadow: unset;
 }
 
 /*# sourceMappingURL=styles.css.map */
