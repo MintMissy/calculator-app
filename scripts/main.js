@@ -22,7 +22,7 @@ function initializeTheme() {
 function setTheme(newTheme) {
     // Toggle theme class and attribute on body
     var currentTheme = document.body.getAttribute('currentTheme');
-    if (currentTheme === undefined) {
+    if (currentTheme !== undefined && currentTheme !== null) {
         document.body.classList.toggle(currentTheme);
     }
     // Add new theme class and attribute to body
