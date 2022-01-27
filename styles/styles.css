@@ -10,8 +10,10 @@ body.dark {
   --key-primary-shadow: hsl(6, 70%, 34%);
   --key-accent-background: hsl(225, 21%, 49%);
   --key-accent-shadow: hsl(224, 28%, 35%);
-  --text-clr-primary: hsl(221, 14%, 31%);
-  --text-clr-secondary: hsl(0, 0%, 100%);
+  --text-clr-primary: hsl(0, 0%, 100%);
+  --text-keypad: hsl(221, 14%, 31%);
+  --text-keypad--primary: hsl(0, 0%, 100%);
+  --text-keypad--accent: hsl(0, 0%, 100%);
 }
 
 body.light {
@@ -26,7 +28,9 @@ body.light {
   --key-accent-background: hsl(185, 42%, 37%);
   --key-accent-shadow: hsl(185, 58%, 25%);
   --text-clr-primary: hsl(60, 10%, 19%);
-  --text-clr-secondary: hsl(0, 0%, 100%);
+  --text-keypad: hsl(60, 10%, 19%);
+  --text-keypad--primary: hsl(0, 0%, 100%);
+  --text-keypad--accent: hsl(0, 0%, 100%);
 }
 
 body.dark--purple {
@@ -41,7 +45,9 @@ body.dark--purple {
   --key-accent-background: hsl(281, 89%, 26%);
   --key-accent-shadow: hsl(285, 91%, 52%);
   --text-clr-primary: hsl(52, 100%, 62%);
-  --text-clr-secondary: hsl(0, 0%, 100%);
+  --text-keypad: hsl(52, 100%, 62%);
+  --text-keypad--primary: hsl(198, 20%, 13%);
+  --text-keypad--accent: hsl(0, 0%, 100%);
 }
 
 /* Box sizing rules */
@@ -137,13 +143,13 @@ body {
   justify-content: space-between;
 }
 .calculator__header h1 {
-  color: var(--text-clr-secondary);
+  color: var(--text-clr-primary);
 }
 .calculator__header .theme-container {
   display: flex;
   align-items: flex-end;
   gap: 1.5rem;
-  color: var(--text-clr-secondary);
+  color: var(--text-clr-primary);
 }
 .calculator__header .theme-container .theme-toggler {
   display: flex;
@@ -181,7 +187,7 @@ body {
 .calculator__result p {
   padding: 1rem;
   font-size: 3rem;
-  color: var(--text-clr-secondary);
+  color: var(--text-clr-primary);
   text-align: right;
 }
 .calculator__keyboard {
@@ -212,7 +218,7 @@ body {
   padding: 0.5rem;
   padding-top: 1rem;
   font-size: 2rem;
-  color: var(--text-clr-primary);
+  color: var(--text-keypad);
   box-shadow: 0 6px var(--key-shadow);
 }
 .calculator__keyboard .key--small-fs {
@@ -220,12 +226,12 @@ body {
 }
 .calculator__keyboard .key--accent {
   background-color: var(--key-accent-background);
-  color: var(--text-clr-secondary);
+  color: var(--text-keypad--accent);
   box-shadow: 0 6px var(--key-accent-shadow);
 }
 .calculator__keyboard .key--primary {
   background-color: var(--key-primary-background);
-  color: var(--text-clr-secondary);
+  color: var(--text-keypad--primary);
   box-shadow: 0 6px var(--key-primary-shadow);
 }
 .calculator__keyboard .key--long {

@@ -15,8 +15,10 @@ body.dark {
   --key-accent-shadow: hsl(224, 28%, 35%);
 
   // Text colors
-  --text-clr-primary: hsl(221, 14%, 31%);
-  --text-clr-secondary: hsl(0, 0%, 100%);
+  --text-clr-primary: hsl(0, 0%, 100%);
+  --text-keypad: hsl(221, 14%, 31%);
+  --text-keypad--primary: hsl(0, 0%, 100%);
+  --text-keypad--accent: hsl(0, 0%, 100%);
 }
 
 body.light {
@@ -37,7 +39,9 @@ body.light {
 
   // Text colors
   --text-clr-primary: hsl(60, 10%, 19%);
-  --text-clr-secondary: hsl(0, 0%, 100%);
+  --text-keypad: hsl(60, 10%, 19%);
+  --text-keypad--primary: hsl(0, 0%, 100%);
+  --text-keypad--accent: hsl(0, 0%, 100%);
 }
 
 body.dark--purple {
@@ -58,5 +62,7 @@ body.dark--purple {
 
   // Text colors
   --text-clr-primary: hsl(52, 100%, 62%);
-  --text-clr-secondary: hsl(0, 0%, 100%);
+  --text-keypad: hsl(52, 100%, 62%);
+  --text-keypad--primary: hsl(198, 20%, 13%);
+  --text-keypad--accent: hsl(0, 0%, 100%);
 }
