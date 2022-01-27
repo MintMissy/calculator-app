@@ -5,7 +5,8 @@ const themeTogglerControllers = document.getElementById(
 ).children;
 
 // Assign on controller clicks
-for (const controller of themeTogglerControllers) {
+for (let i = 0; i < themeTogglerControllers.length; i++) {
+  const controller = themeTogglerControllers[i];
   const theme = controller.getAttribute('theme');
   controller.addEventListener('click', () => {
     setTheme(theme);
@@ -33,7 +34,8 @@ function setTheme(newTheme: string): void {
   document.body.classList.add(newTheme);
 
   // Remove active class from previous controller
-  for (const controller of themeTogglerControllers) {
+  for (let i = 0; i < themeTogglerControllers.length; i++) {
+    const controller = themeTogglerControllers[i];
     if (controller.classList.contains('active')) {
       controller.classList.remove('active');
       break;
@@ -44,47 +46,89 @@ function setTheme(newTheme: string): void {
 initializeTheme();
 
 // CALCULATOR CORE
-let value = '';
-let operationValue = '';
+let value = 0;
+let operationValue = 0;
 let currentOperation = '';
+let afterResult = false;
 
 const calculatorScreen = document.getElementById('calculator-screen');
 
 function resetCalculator() {
-  value = '';
-  operationValue = '';
+  value = 0;
+  operationValue = 0;
   currentOperation = '';
+  let afterResult = false;
 }
 
 function newCharacter(character: string): void {
-  const lastOperationValueCharacter = operationValue[operationValue.length - 1];
-  if (character === '.' && lastOperationValueCharacter === '.') {
-    return;
+  if (afterResult || value === 0) {
+    value = parseFloat(character);
+    afterResult = false;
+  } else if (currentOperation === '') {
+    const previousValue = value.toString();
+    value = parseFloat(previousValue + character);
+  } else {
+    const previousValue = operationValue.toString();
+    operationValue = parseFloat(previousValue + character);
   }
-
-  operationValue += character;
 }
 
 function backspace() {
-  operationValue = operationValue.slice(0, operationValue.length - 1);
+  if (operationValue === 0 && currentOperation === '') {
+    value = removeLastNumber(value);
+  } else if (operationValue === 0 && currentOperation !== '') {
+    currentOperation = '';
+  } else {
+    operationValue = removeLastNumber(operationValue);
+  }
+}
+
+function removeLastNumber(_number: number): number {
+  let numberStr = _number.toString();
+  _number = parseFloat(numberStr.slice(0, numberStr.length - 1));
+  return isNaN(_number) ? 0 : _number;
 }
 
 function refreshScreen() {
-  const text = value + currentOperation + operationValue;
-  calculatorScreen.innerText = text === '' ? '0' : text;
+  const secondValue = operationValue === 0 ? '' : operationValue.toString();
+  calculatorScreen.innerText = `${value} ${currentOperation} ${secondValue}`;
 }
 
-function addValue() {}
+function operation(operator: string) {
+  let result: number;
 
-function removeValue() {}
+  if (operationValue === 0) {
+    currentOperation = operator;
+  } else {
+    switch (currentOperation) {
+      case '+':
+        result = value + operationValue;
+        break;
+      case '-':
+        result = value - operationValue;
+        break;
+      case 'x':
+        result = value * operationValue;
+        break;
+      case '/':
+        result = value / operationValue;
+        break;
+      default:
+        result = value;
+    }
+    value = result;
+    operationValue = 0;
+  }
 
-function multiplicateValue() {}
+  afterResult = operator === '' ? true : false;
 
-function divideValue() {}
+  currentOperation = operator;
+  refreshScreen();
+}
 
-// Refresh calculator screen whenever button is clicked
 const calculatorKeyboard = document.getElementById('calculator-keyboard');
-for (const key of calculatorKeyboard.children) {
+for (let i = 0; i < calculatorKeyboard.children.length; i++) {
+  const key = calculatorKeyboard.children[i];
   const keyRole = key.getAttribute('role');
 
   // Assign new character button role
@@ -92,17 +136,34 @@ for (const key of calculatorKeyboard.children) {
     key.addEventListener('click', () => {
       const character = key.innerHTML;
       newCharacter(character);
+      refreshScreen();
     });
   }
 
   if (keyRole === 'reset') {
-    key.addEventListener('click', resetCalculator);
+    key.addEventListener('click', () => {
+      resetCalculator();
+      refreshScreen();
+    });
   }
 
   if (keyRole === 'backspace') {
-    key.addEventListener('click', backspace);
+    key.addEventListener('click', () => {
+      backspace();
+      refreshScreen();
+    });
   }
 
-  // Assign screen refreshing
-  key.addEventListener('click', refreshScreen);
+  if (keyRole === 'operation') {
+    key.addEventListener('click', () => {
+      const operator = key.innerHTML;
+      operation(operator);
+    });
+  }
+
+  if (keyRole === 'result') {
+    key.addEventListener('click', () => {
+      operation('');
+    });
+  }
 }

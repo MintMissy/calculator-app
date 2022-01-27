@@ -1,7 +1,8 @@
 // THEME CORE
 var themeToggler = document.getElementById('theme-toggler');
 var themeTogglerControllers = document.getElementById('theme-toggler-controllers').children;
-var _loop_1 = function (controller) {
+var _loop_1 = function (i) {
+    var controller = themeTogglerControllers[i];
     var theme = controller.getAttribute('theme');
     controller.addEventListener('click', function () {
         setTheme(theme);
@@ -9,9 +10,8 @@ var _loop_1 = function (controller) {
     });
 };
 // Assign on controller clicks
-for (var _i = 0, themeTogglerControllers_1 = themeTogglerControllers; _i < themeTogglerControllers_1.length; _i++) {
-    var controller = themeTogglerControllers_1[_i];
-    _loop_1(controller);
+for (var i = 0; i < themeTogglerControllers.length; i++) {
+    _loop_1(i);
 }
 function initializeTheme() {
     var controller = themeTogglerControllers[0];
@@ -30,8 +30,8 @@ function setTheme(newTheme) {
     document.body.setAttribute('currentTheme', newTheme);
     document.body.classList.add(newTheme);
     // Remove active class from previous controller
-    for (var _i = 0, themeTogglerControllers_2 = themeTogglerControllers; _i < themeTogglerControllers_2.length; _i++) {
-        var controller = themeTogglerControllers_2[_i];
+    for (var i = 0; i < themeTogglerControllers.length; i++) {
+        var controller = themeTogglerControllers[i];
         if (controller.classList.contains('active')) {
             controller.classList.remove('active');
             break;
@@ -40,54 +40,116 @@ function setTheme(newTheme) {
 }
 initializeTheme();
 // CALCULATOR CORE
-var value = '';
-var operationValue = '';
+var value = 0;
+var operationValue = 0;
 var currentOperation = '';
+var afterResult = false;
 var calculatorScreen = document.getElementById('calculator-screen');
 function resetCalculator() {
-    value = '';
-    operationValue = '';
+    value = 0;
+    operationValue = 0;
     currentOperation = '';
+    var afterResult = false;
 }
 function newCharacter(character) {
-    var lastOperationValueCharacter = operationValue[operationValue.length - 1];
-    if (character === '.' && lastOperationValueCharacter === '.') {
-        return;
+    if (afterResult || value === 0) {
+        value = parseFloat(character);
+        afterResult = false;
     }
-    operationValue += character;
+    else if (currentOperation === '') {
+        var previousValue = value.toString();
+        value = parseFloat(previousValue + character);
+    }
+    else {
+        var previousValue = operationValue.toString();
+        operationValue = parseFloat(previousValue + character);
+    }
 }
 function backspace() {
-    operationValue = operationValue.slice(0, operationValue.length - 1);
+    if (operationValue === 0 && currentOperation === '') {
+        value = removeLastNumber(value);
+    }
+    else if (operationValue === 0 && currentOperation !== '') {
+        currentOperation = '';
+    }
+    else {
+        operationValue = removeLastNumber(operationValue);
+    }
+}
+function removeLastNumber(_number) {
+    var numberStr = _number.toString();
+    _number = parseFloat(numberStr.slice(0, numberStr.length - 1));
+    return isNaN(_number) ? 0 : _number;
 }
 function refreshScreen() {
-    var text = value + currentOperation + operationValue;
-    calculatorScreen.innerText = text === '' ? '0' : text;
+    var secondValue = operationValue === 0 ? '' : operationValue.toString();
+    calculatorScreen.innerText = "".concat(value, " ").concat(currentOperation, " ").concat(secondValue);
 }
-function addValue() { }
-function removeValue() { }
-function multiplicateValue() { }
-function divideValue() { }
-// Refresh calculator screen whenever button is clicked
+function operation(operator) {
+    var result;
+    if (operationValue === 0) {
+        currentOperation = operator;
+    }
+    else {
+        switch (currentOperation) {
+            case '+':
+                result = value + operationValue;
+                break;
+            case '-':
+                result = value - operationValue;
+                break;
+            case 'x':
+                result = value * operationValue;
+                break;
+            case '/':
+                result = value / operationValue;
+                break;
+            default:
+                result = value;
+        }
+        value = result;
+        operationValue = 0;
+    }
+    afterResult = operator === '' ? true : false;
+    currentOperation = operator;
+    refreshScreen();
+}
 var calculatorKeyboard = document.getElementById('calculator-keyboard');
-var _loop_2 = function (key) {
+var _loop_2 = function (i) {
+    var key = calculatorKeyboard.children[i];
     var keyRole = key.getAttribute('role');
     // Assign new character button role
     if (keyRole === 'newCharacter') {
         key.addEventListener('click', function () {
             var character = key.innerHTML;
             newCharacter(character);
+            refreshScreen();
         });
     }
     if (keyRole === 'reset') {
-        key.addEventListener('click', resetCalculator);
+        key.addEventListener('click', function () {
+            resetCalculator();
+            refreshScreen();
+        });
     }
     if (keyRole === 'backspace') {
-        key.addEventListener('click', backspace);
+        key.addEventListener('click', function () {
+            backspace();
+            refreshScreen();
+        });
     }
-    // Assign screen refreshing
-    key.addEventListener('click', refreshScreen);
+    if (keyRole === 'operation') {
+        key.addEventListener('click', function () {
+            var operator = key.innerHTML;
+            operation(operator);
+        });
+    }
+    if (keyRole === 'result') {
+        key.addEventListener('click', function () {
+            operation('');
+        });
+    }
 };
-for (var _a = 0, _b = calculatorKeyboard.children; _a < _b.length; _a++) {
-    var key = _b[_a];
-    _loop_2(key);
+for (var i = 0; i < calculatorKeyboard.children.length; i++) {
+    _loop_2(i);
 }
