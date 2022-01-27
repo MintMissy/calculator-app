@@ -41,26 +41,30 @@
           </div>
         </header>
         <div class="calculator__result">
-          <p>399,982</p>
+          <p id="calculator-screen">399,982</p>
         </div>
-        <div class="calculator__keyboard">
-          <button class="key">7</button>
-          <button class="key">8</button>
-          <button class="key">9</button>
-          <button class="key key--small-fs key--accent">DEL</button>
-          <button class="key">4</button>
-          <button class="key">5</button>
-          <button class="key">6</button>
+        <div id="calculator-keyboard" class="calculator__keyboard">
+          <button role="newCharacter" class="key">7</button>
+          <button role="newCharacter" class="key">8</button>
+          <button role="newCharacter" class="key">9</button>
+          <button role="backspace" class="key key--small-fs key--accent">
+            DEL
+          </button>
+          <button role="newCharacter" class="key">4</button>
+          <button role="newCharacter" class="key">5</button>
+          <button role="newCharacter" class="key">6</button>
           <button class="key">+</button>
-          <button class="key">1</button>
-          <button class="key">2</button>
-          <button class="key">3</button>
+          <button role="newCharacter" class="key">1</button>
+          <button role="newCharacter" class="key">2</button>
+          <button role="newCharacter" class="key">3</button>
           <button class="key">-</button>
-          <button class="key">.</button>
-          <button class="key">0</button>
+          <button role="newCharacter" class="key">.</button>
+          <button role="newCharacter" class="key">0</button>
           <button class="key">/</button>
           <button class="key">x</button>
-          <button class="key key--small-fs key--long key--accent">RESET</button>
+          <button role="reset" class="key key--small-fs key--long key--accent">
+            RESET
+          </button>
           <button class="key key--small-fs key--long key--primary">=</button>
         </div>
       </div>

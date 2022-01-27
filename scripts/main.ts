@@ -1,3 +1,4 @@
+// THEME CORE
 const themeToggler = document.getElementById('theme-toggler');
 const themeTogglerControllers = document.getElementById(
   'theme-toggler-controllers'
@@ -41,3 +42,67 @@ function setTheme(newTheme: string): void {
 }
 
 initializeTheme();
+
+// CALCULATOR CORE
+let value = '';
+let operationValue = '';
+let currentOperation = '';
+
+const calculatorScreen = document.getElementById('calculator-screen');
+
+function resetCalculator() {
+  value = '';
+  operationValue = '';
+  currentOperation = '';
+}
+
+function newCharacter(character: string): void {
+  const lastOperationValueCharacter = operationValue[operationValue.length - 1];
+  if (character === '.' && lastOperationValueCharacter === '.') {
+    return;
+  }
+
+  operationValue += character;
+}
+
+function backspace() {
+  operationValue = operationValue.slice(0, operationValue.length - 1);
+}
+
+function refreshScreen() {
+  const text = value + currentOperation + operationValue;
+  calculatorScreen.innerText = text === '' ? '0' : text;
+}
+
+function addValue() {}
+
+function removeValue() {}
+
+function multiplicateValue() {}
+
+function divideValue() {}
+
+// Refresh calculator screen whenever button is clicked
+const calculatorKeyboard = document.getElementById('calculator-keyboard');
+for (const key of calculatorKeyboard.children) {
+  const keyRole = key.getAttribute('role');
+
+  // Assign new character button role
+  if (keyRole === 'newCharacter') {
+    key.addEventListener('click', () => {
+      const character = key.innerHTML;
+      newCharacter(character);
+    });
+  }
+
+  if (keyRole === 'reset') {
+    key.addEventListener('click', resetCalculator);
+  }
+
+  if (keyRole === 'backspace') {
+    key.addEventListener('click', backspace);
+  }
+
+  // Assign screen refreshing
+  key.addEventListener('click', refreshScreen);
+}
