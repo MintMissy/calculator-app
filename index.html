@@ -14,24 +14,28 @@
 
     <title>Frontend Mentor | Calculator app</title>
     <link rel="stylesheet" href="styles/styles.css" />
+    <script src="scripts/main.js" defer></script>
   </head>
-  <body class="dark">
+  <body>
     <main>
       <div class="calculator">
         <header class="calculator__header">
           <h1>calc</h1>
           <div class="theme-container">
             <p>THEME</p>
-            <div class="theme-toggler">
+            <div id="theme-toggler" class="theme-toggler">
               <div class="theme-toggler__labels">
                 <div>1</div>
                 <div>2</div>
                 <div>3</div>
               </div>
-              <div class="theme-toggler__controllers">
-                <div class="active"></div>
-                <div></div>
-                <div></div>
+              <div
+                id="theme-toggler-controllers"
+                class="theme-toggler__controllers"
+              >
+                <div theme="dark" class="active"></div>
+                <div theme="light"></div>
+                <div theme="dark--purple"></div>
               </div>
             </div>
           </div>

@@ -9,6 +9,10 @@ body {
   font-family: 'Spartan', sans-serif;
 }
 
+* {
+  transition: background-color 0.25s, box-shadow 0.25s;
+}
+
 .calculator {
   $sectionBorderRadius: 0.5rem;
   $sectionPadding: 1.5rem;
