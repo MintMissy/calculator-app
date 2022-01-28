@@ -17,22 +17,35 @@ for (let i = 0; i < themeTogglerControllers.length; i++) {
 function initializeTheme() {
   let storageTheme = localStorage.getItem('theme');
 
+  // If user visit site first time set theme based on preferences
   if (storageTheme === null) {
-    localStorage.setItem('theme', 'light');
-    storageTheme = 'light';
-  }
-
-  for (let i = 0; i < themeTogglerControllers.length; i++) {
-    const controller = themeTogglerControllers[i];
-    const controllerTheme = controller.getAttribute('theme');
-    if (controllerTheme === storageTheme) {
-      controller.classList.add('active');
-      break;
+    if (window.matchMedia) {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        localStorage.setItem('theme', 'dark');
+        storageTheme = 'dark';
+      } else {
+        localStorage.setItem('theme', 'light');
+        storageTheme = 'light';
+      }
+    } else {
+      localStorage.setItem('theme', 'dark');
+      storageTheme = 'dark';
     }
   }
 
   setTheme(storageTheme);
   document.body.setAttribute('currentTheme', storageTheme);
+
+  // Set active class for dot
+  for (let i = 0; i < themeTogglerControllers.length; i++) {
+    const controller = themeTogglerControllers[i];
+    const controllerTheme = controller.getAttribute('theme');
+
+    if (controllerTheme === storageTheme) {
+      controller.classList.add('active');
+      break;
+    }
+  }
 }
 
 function setTheme(newTheme: string): void {

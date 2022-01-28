@@ -1,38 +1,49 @@
 // THEME CORE
-var themeToggler = document.getElementById('theme-toggler');
-var themeTogglerControllers = document.getElementById('theme-toggler-controllers').children;
-var _loop_1 = function (i) {
-    var controller = themeTogglerControllers[i];
-    var theme = controller.getAttribute('theme');
-    controller.addEventListener('click', function () {
+const themeToggler = document.getElementById('theme-toggler');
+const themeTogglerControllers = document.getElementById('theme-toggler-controllers').children;
+// Assign on controller clicks
+for (let i = 0; i < themeTogglerControllers.length; i++) {
+    const controller = themeTogglerControllers[i];
+    const theme = controller.getAttribute('theme');
+    controller.addEventListener('click', () => {
         setTheme(theme);
         controller.classList.add('active');
     });
-};
-// Assign on controller clicks
-for (var i = 0; i < themeTogglerControllers.length; i++) {
-    _loop_1(i);
 }
 function initializeTheme() {
-    var storageTheme = localStorage.getItem('theme');
+    let storageTheme = localStorage.getItem('theme');
+    // If user visit site first time set theme based on preferences
     if (storageTheme === null) {
-        localStorage.setItem('theme', 'light');
-        storageTheme = 'light';
+        if (window.matchMedia) {
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                localStorage.setItem('theme', 'dark');
+                storageTheme = 'dark';
+            }
+            else {
+                localStorage.setItem('theme', 'light');
+                storageTheme = 'light';
+            }
+        }
+        else {
+            localStorage.setItem('theme', 'dark');
+            storageTheme = 'dark';
+        }
     }
-    for (var i = 0; i < themeTogglerControllers.length; i++) {
-        var controller = themeTogglerControllers[i];
-        var controllerTheme = controller.getAttribute('theme');
+    setTheme(storageTheme);
+    document.body.setAttribute('currentTheme', storageTheme);
+    // Set active class for dot
+    for (let i = 0; i < themeTogglerControllers.length; i++) {
+        const controller = themeTogglerControllers[i];
+        const controllerTheme = controller.getAttribute('theme');
         if (controllerTheme === storageTheme) {
             controller.classList.add('active');
             break;
         }
     }
-    setTheme(storageTheme);
-    document.body.setAttribute('currentTheme', storageTheme);
 }
 function setTheme(newTheme) {
     // Toggle theme class and attribute on body
-    var currentTheme = document.body.getAttribute('currentTheme');
+    const currentTheme = document.body.getAttribute('currentTheme');
     if (currentTheme !== undefined && currentTheme !== null) {
         document.body.classList.toggle(currentTheme);
     }
@@ -42,8 +53,8 @@ function setTheme(newTheme) {
     // Save picked theme to local storage
     localStorage.setItem('theme', newTheme);
     // Remove active class from previous controller
-    for (var i = 0; i < themeTogglerControllers.length; i++) {
-        var controller = themeTogglerControllers[i];
+    for (let i = 0; i < themeTogglerControllers.length; i++) {
+        const controller = themeTogglerControllers[i];
         if (controller.classList.contains('active')) {
             controller.classList.remove('active');
             break;
@@ -52,13 +63,13 @@ function setTheme(newTheme) {
 }
 initializeTheme();
 // CALCULATOR CORE
-var value = 0;
-var valueStr = '';
-var operationValue = 0;
-var operationValueStr = '';
-var currentOperation = '';
-var afterResult = false;
-var calculatorScreen = document.getElementById('calculator-screen');
+let value = 0;
+let valueStr = '';
+let operationValue = 0;
+let operationValueStr = '';
+let currentOperation = '';
+let afterResult = false;
+const calculatorScreen = document.getElementById('calculator-screen');
 function resetCalculator() {
     value = 0;
     valueStr = '0';
@@ -122,10 +133,10 @@ function backspace() {
     }
 }
 function refreshScreen() {
-    calculatorScreen.innerText = "".concat(valueStr, " ").concat(currentOperation, " ").concat(operationValueStr);
+    calculatorScreen.innerText = `${valueStr} ${currentOperation} ${operationValueStr}`;
 }
 function operation(operator) {
-    var result;
+    let result;
     if (operationValue === 0) {
         currentOperation = operator;
     }
@@ -154,42 +165,39 @@ function operation(operator) {
     afterResult = operator === '' ? true : false;
     currentOperation = operator;
 }
-var calculatorKeyboard = document.getElementById('calculator-keyboard');
-var _loop_2 = function (i) {
-    var key = calculatorKeyboard.children[i];
-    var keyRole = key.getAttribute('role');
+const calculatorKeyboard = document.getElementById('calculator-keyboard');
+for (let i = 0; i < calculatorKeyboard.children.length; i++) {
+    const key = calculatorKeyboard.children[i];
+    const keyRole = key.getAttribute('role');
     // Assign new character button role
     if (keyRole === 'newCharacter') {
-        key.addEventListener('click', function () {
-            var character = key.textContent;
+        key.addEventListener('click', () => {
+            const character = key.textContent;
             newCharacter(character);
         });
     }
     if (keyRole === 'reset') {
-        key.addEventListener('click', function () {
+        key.addEventListener('click', () => {
             resetCalculator();
         });
     }
     if (keyRole === 'backspace') {
-        key.addEventListener('click', function () {
+        key.addEventListener('click', () => {
             backspace();
         });
     }
     if (keyRole === 'operation') {
-        key.addEventListener('click', function () {
-            var operator = key.innerHTML;
+        key.addEventListener('click', () => {
+            const operator = key.innerHTML;
             operation(operator);
         });
     }
     if (keyRole === 'result') {
-        key.addEventListener('click', function () {
+        key.addEventListener('click', () => {
             operation('');
         });
     }
-    key.addEventListener('click', function () {
+    key.addEventListener('click', () => {
         refreshScreen();
     });
-};
-for (var i = 0; i < calculatorKeyboard.children.length; i++) {
-    _loop_2(i);
 }
