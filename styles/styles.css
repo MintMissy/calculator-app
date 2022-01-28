@@ -295,4 +295,16 @@ body {
   }
 }
 
+.attribution {
+  margin-top: 1rem;
+  font-size: 0.6875rem;
+  color: var(--text-clr-primary);
+  text-align: center;
+}
+
+.attribution a {
+  font-weight: 700;
+  color: var(--text-clr-primary);
+}
+
 /*# sourceMappingURL=styles.css.map */
