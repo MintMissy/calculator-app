@@ -14,11 +14,21 @@ for (var i = 0; i < themeTogglerControllers.length; i++) {
     _loop_1(i);
 }
 function initializeTheme() {
-    var controller = themeTogglerControllers[0];
-    var theme = controller.getAttribute('theme');
-    setTheme(theme);
-    document.body.setAttribute('currentTheme', theme);
-    controller.classList.add('active');
+    var storageTheme = localStorage.getItem('theme');
+    if (storageTheme === null) {
+        localStorage.setItem('theme', 'light');
+        storageTheme = 'light';
+    }
+    for (var i = 0; i < themeTogglerControllers.length; i++) {
+        var controller = themeTogglerControllers[i];
+        var controllerTheme = controller.getAttribute('theme');
+        if (controllerTheme === storageTheme) {
+            controller.classList.add('active');
+            break;
+        }
+    }
+    setTheme(storageTheme);
+    document.body.setAttribute('currentTheme', storageTheme);
 }
 function setTheme(newTheme) {
     // Toggle theme class and attribute on body
@@ -29,6 +39,8 @@ function setTheme(newTheme) {
     // Add new theme class and attribute to body
     document.body.setAttribute('currentTheme', newTheme);
     document.body.classList.add(newTheme);
+    // Save picked theme to local storage
+    localStorage.setItem('theme', newTheme);
     // Remove active class from previous controller
     for (var i = 0; i < themeTogglerControllers.length; i++) {
         var controller = themeTogglerControllers[i];
