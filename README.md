@@ -2,13 +2,9 @@
 
 ![Design preview for the Calculator app coding challenge](./design/desktop-preview.jpg)
 
-## Welcome! 👋
+### Result Screenshot
 
-Thanks for checking out this front-end coding challenge.
-
-[Frontend Mentor](https://www.frontendmentor.io) challenges help you improve your coding skills by building realistic projects.
-
-**To do this challenge, you need a good understanding of HTML, CSS and JavaScript.**
+![](./result-screen.png)
 
 ## The challenge
 
@@ -24,3 +20,9 @@ Your users should be able to:
 - **Bonus**: Have their initial theme preference checked using `prefers-color-scheme` and have any additional changes saved in the browser
 
 Want some support on the challenge? [Join our Slack community](https://www.frontendmentor.io/slack) and ask questions in the **#help** channel.
+
+### Built with
+
+- Semantic HTML5 markup
+- SCSS
+- Typescript
