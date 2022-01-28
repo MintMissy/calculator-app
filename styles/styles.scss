@@ -15,7 +15,8 @@ body {
 
 .calculator {
   $sectionBorderRadius: 0.5rem;
-  $sectionPadding: 1.5rem;
+  $sectionPaddingMobile: 1rem;
+  $sectionPaddingDesktop: 1.5rem;
   display: flex;
   flex-direction: column;
   max-width: 650px;
@@ -80,24 +81,42 @@ body {
   &__result {
     border-radius: $sectionBorderRadius;
     background-color: var(--screen-background);
-    padding: $sectionPadding;
+    padding: $sectionPaddingMobile;
+
+    @media screen and (min-width: 350px) {
+      padding: $sectionPaddingDesktop;
+    }
 
     p {
-      padding: 1rem;
-      font-size: 3rem;
+      font-size: 2.5rem;
       color: var(--text-clr-primary);
       text-align: right;
+
+      @media screen and (min-width: 500px) {
+        font-size: 3rem;
+        padding: 1rem;
+      }
     }
   }
 
   &__keyboard {
-    $keyShadowSize: 6px;
+    $keyShadowSizeDesktop: 6px;
+    $keyShadowSizeMobile: 4px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     border-radius: $sectionBorderRadius;
     background-color: var(--keypad-background);
-    padding: $sectionPadding;
-    gap: 1.5rem;
+    padding: $sectionPaddingMobile;
+    gap: 0.75rem;
+
+    @media screen and (min-width: 350px) {
+      gap: 1rem;
+      padding: $sectionPaddingDesktop;
+    }
+
+    @media screen and (min-width: 500px) {
+      gap: 1.5rem;
+    }
 
     .key {
       position: relative;
@@ -108,38 +127,65 @@ body {
       border: none;
       border-radius: $sectionBorderRadius;
       background-color: var(--key-background);
-      padding: 0.5rem;
-      padding-top: 1rem;
+      padding-top: 0.5rem;
       font-size: 2rem;
       color: var(--text-keypad);
       cursor: pointer;
       transition: transform 0.1s, box-shadow 0.1s;
-      box-shadow: 0 $keyShadowSize var(--key-shadow);
+      box-shadow: 0 $keyShadowSizeMobile var(--key-shadow);
+
+      @media screen and (min-width: 500px) {
+        padding: 0.5rem;
+        padding-top: 1rem;
+        box-shadow: 0 $keyShadowSizeDesktop var(--key-shadow);
+      }
 
       &--small-fs {
-        font-size: 1.5rem;
+        font-size: 1.15rem;
+
+        @media screen and (min-width: 500px) {
+          font-size: 1.5rem;
+        }
       }
 
       &--accent {
         background-color: var(--key-accent-background);
         color: var(--text-keypad--accent);
-        box-shadow: 0 $keyShadowSize var(--key-accent-shadow);
+        box-shadow: 0 $keyShadowSizeMobile var(--key-accent-shadow);
+
+        @media screen and (min-width: 500px) {
+          box-shadow: 0 $keyShadowSizeDesktop var(--key-accent-shadow);
+        }
       }
 
       &--primary {
         background-color: var(--key-primary-background);
         color: var(--text-keypad--primary);
-        box-shadow: 0 $keyShadowSize var(--key-primary-shadow);
+        box-shadow: 0 $keyShadowSizeMobile var(--key-primary-shadow);
+
+        @media screen and (min-width: 500px) {
+          box-shadow: 0 $keyShadowSizeDesktop var(--key-primary-shadow);
+        }
       }
 
       &--long {
         grid-column: span 2;
       }
+
+      @media screen and (max-width: 500px) {
+        &--high {
+          padding-block: 1rem 0.75rem;
+        }
+      }
     }
 
     .key:active {
-      transform: translateY($keyShadowSize);
+      transform: translateY($keyShadowSizeMobile);
       box-shadow: unset;
+
+      @media screen and (min-width: 500px) {
+        transform: translateY($keyShadowSizeDesktop);
+      }
     }
   }
 }

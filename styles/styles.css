@@ -189,21 +189,42 @@ body {
 .calculator__result {
   border-radius: 0.5rem;
   background-color: var(--screen-background);
-  padding: 1.5rem;
+  padding: 1rem;
+}
+@media screen and (min-width: 350px) {
+  .calculator__result {
+    padding: 1.5rem;
+  }
 }
 .calculator__result p {
-  padding: 1rem;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: var(--text-clr-primary);
   text-align: right;
+}
+@media screen and (min-width: 500px) {
+  .calculator__result p {
+    font-size: 3rem;
+    padding: 1rem;
+  }
 }
 .calculator__keyboard {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border-radius: 0.5rem;
   background-color: var(--keypad-background);
-  padding: 1.5rem;
-  gap: 1.5rem;
+  padding: 1rem;
+  gap: 0.75rem;
+}
+@media screen and (min-width: 350px) {
+  .calculator__keyboard {
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+}
+@media screen and (min-width: 500px) {
+  .calculator__keyboard {
+    gap: 1.5rem;
+  }
 }
 .calculator__keyboard .key {
   position: relative;
@@ -214,33 +235,64 @@ body {
   border: none;
   border-radius: 0.5rem;
   background-color: var(--key-background);
-  padding: 0.5rem;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
   font-size: 2rem;
   color: var(--text-keypad);
   cursor: pointer;
   transition: transform 0.1s, box-shadow 0.1s;
-  box-shadow: 0 6px var(--key-shadow);
+  box-shadow: 0 4px var(--key-shadow);
+}
+@media screen and (min-width: 500px) {
+  .calculator__keyboard .key {
+    padding: 0.5rem;
+    padding-top: 1rem;
+    box-shadow: 0 6px var(--key-shadow);
+  }
 }
 .calculator__keyboard .key--small-fs {
-  font-size: 1.5rem;
+  font-size: 1.15rem;
+}
+@media screen and (min-width: 500px) {
+  .calculator__keyboard .key--small-fs {
+    font-size: 1.5rem;
+  }
 }
 .calculator__keyboard .key--accent {
   background-color: var(--key-accent-background);
   color: var(--text-keypad--accent);
-  box-shadow: 0 6px var(--key-accent-shadow);
+  box-shadow: 0 4px var(--key-accent-shadow);
+}
+@media screen and (min-width: 500px) {
+  .calculator__keyboard .key--accent {
+    box-shadow: 0 6px var(--key-accent-shadow);
+  }
 }
 .calculator__keyboard .key--primary {
   background-color: var(--key-primary-background);
   color: var(--text-keypad--primary);
-  box-shadow: 0 6px var(--key-primary-shadow);
+  box-shadow: 0 4px var(--key-primary-shadow);
+}
+@media screen and (min-width: 500px) {
+  .calculator__keyboard .key--primary {
+    box-shadow: 0 6px var(--key-primary-shadow);
+  }
 }
 .calculator__keyboard .key--long {
   grid-column: span 2;
 }
+@media screen and (max-width: 500px) {
+  .calculator__keyboard .key--high {
+    padding-block: 1rem 0.75rem;
+  }
+}
 .calculator__keyboard .key:active {
-  transform: translateY(6px);
+  transform: translateY(4px);
   box-shadow: unset;
+}
+@media screen and (min-width: 500px) {
+  .calculator__keyboard .key:active {
+    transform: translateY(6px);
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */
