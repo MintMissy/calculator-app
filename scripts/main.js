@@ -53,7 +53,7 @@ function resetCalculator() {
     operationValue = 0;
     operationValueStr = '';
     currentOperation = '';
-    afterResult = false;
+    afterResult = true;
 }
 function newCharacter(character) {
     if (afterResult || valueStr === '') {
@@ -75,6 +75,9 @@ function newCharacter(character) {
     }
 }
 function addNewCharacter(valueString, newCharacter) {
+    if (valueString === '0') {
+        return newCharacter;
+    }
     if (valueString.includes('.') && newCharacter === '.') {
         return valueString;
     }

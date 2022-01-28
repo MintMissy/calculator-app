@@ -61,7 +61,7 @@ function resetCalculator() {
   operationValue = 0;
   operationValueStr = '';
   currentOperation = '';
-  afterResult = false;
+  afterResult = true;
 }
 
 function newCharacter(character: string): void {
@@ -86,9 +86,14 @@ function newCharacter(character: string): void {
 }
 
 function addNewCharacter(valueString: string, newCharacter: string): string {
+  if (valueString === '0') {
+    return newCharacter;
+  }
+
   if (valueString.includes('.') && newCharacter === '.') {
     return valueString;
   }
+
   return valueString + newCharacter;
 }
 
